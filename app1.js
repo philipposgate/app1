@@ -29,9 +29,7 @@ if (Meteor.isServer) {
 
 Router.configure({
   load: function() {
-    $('html, body').animate({
-      scrollTop: 0
-    }, 400);
+    $('html, body').animate({scrollTop: 0}, 400);
     $('.content').hide().fadeIn(800);
   }
 });
