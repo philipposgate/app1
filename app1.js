@@ -20,6 +20,28 @@ if (Meteor.isClient) {
     	Session.set("counter", counter);
     }
   });
+
+	Template.navbar.helpers({
+		activeIfTemplateIs: function (template) {
+	      var currentRoute = Router.current();
+	      return currentRoute &&
+	        template === currentRoute.lookupTemplate() ? 'active' : '';
+	    }		
+	});
+  
+  Template.contact.created = function ( ) {
+  	console.log("conact created");
+  }
+  Template.contact.destroyed = function ( ) {
+  	  	console.log("conact destroyed");
+  }
+  Template.contact.rendered = function() {
+  	console.log("conact rendered");
+  	if (this.$("#cal").is(":empty"))
+  	{
+	  	this.$("#cal").fullCalendar();
+  	}
+  };
 }
 
 if (Meteor.isServer) {
@@ -28,9 +50,10 @@ if (Meteor.isServer) {
 }
 
 Router.configure({
+  layoutTemplate: 'siteLayout',
   load: function() {
-    $('html, body').animate({scrollTop: 0}, 400);
-    $('.content').hide().fadeIn(800);
+   // $('html, body').animate({scrollTop: 0}, 400);
+   // $('.content').hide().fadeIn(800);
   }
 });
 
@@ -38,29 +61,12 @@ Router.map( function () {
     
     this.route('home', {
     	path: '/', 
-    	layoutTemplate: 'siteLayout',
-    	action: function(){
-    		this.render();
-    		updateSiteNavBtns('home');}
     });
     	
     this.route('about', {
-    	layoutTemplate: 'siteLayout',
-    	action: function(){
-    		this.render();
-    		updateSiteNavBtns('about');}
     });
     
     this.route('contact', {
-    	layoutTemplate: 'siteLayout',
-    	action: function(){
-    		this.render();
-    		updateSiteNavBtns('contact');}
     });
 });
 
-function updateSiteNavBtns (siteNavBtn)
-{
-	$("li", "#siteNavBtns").removeClass("active");
-	$("li[siteNavBtn=" + siteNavBtn + "]", "#siteNavBtns").addClass("active");
-}

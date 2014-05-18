@@ -25,10 +25,10 @@
           </button>
           <a class="brand" href="/">Meteor App 1</a>
           <div class="nav-collapse collapse">
-            <ul id="siteNavBtns" class="nav">
-              <li siteNavBtn="home" class="active"><a href="{{ pathFor 'home' }}">Home</a></li>
-              <li siteNavBtn="about"><a href="{{ pathFor 'about' }}">About</a></li>
-              <li siteNavBtn="contact"><a href="{{ pathFor 'contact' }}">Contact</a></li>
+            <ul class="nav">
+              <li class="{{ activeIfTemplateIs 'home' }}"><a href="{{ pathFor 'home' }}">Home</a></li>
+              <li class="{{ activeIfTemplateIs 'about' }}"><a href="{{ pathFor 'about' }}">About</a></li>
+              <li class="{{ activeIfTemplateIs 'contact' }}"><a href="{{ pathFor 'contact' }}">Contact</a></li>
             </ul>
             <div class="btn pull-right" style="padding-top:5px;">
 				{{> loginButtons align="right"}}
@@ -48,7 +48,11 @@
 </template>
 
 <template name="contact">
-	contact
+	<div class="row-fluid">
+		<div class="span6 offset3">
+			<div id="cal"></div>
+		</div>
+	</div>
 </template>
 
 <template name="hello">
